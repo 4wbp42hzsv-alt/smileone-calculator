@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="my">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b1220">
+<title>SmileOne Diamond Calculator</title>
+<style>
+:root{--bg:#0b1220;--panel:#121d30;--panel2:#17243a;--line:#263750;--text:#edf3fc;--muted:#91a3bb;--blue:#67a8ff;--green:#55d6a1;--gold:#f3c969}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(160deg,#0b1220,#101b2d 60%,#0b1220);color:var(--text);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.wrap{max-width:1180px;margin:auto;padding:24px 16px 60px}.head{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px}.brand{display:flex;gap:12px;align-items:center}.logo{width:44px;height:44px;border-radius:14px;background:#1e3657;display:grid;place-items:center;font-size:23px}.eyebrow{color:var(--blue);font-size:11px;letter-spacing:2px;font-weight:800}.head h1{font-size:clamp(20px,4vw,28px);margin:2px 0}.sub{color:var(--muted);font-size:13px}.pill{border:1px solid #315174;color:#a9ceff;border-radius:999px;padding:7px 11px;font-size:12px;white-space:nowrap}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.card{background:linear-gradient(145deg,#152238,#111b2c);border:1px solid var(--line);border-radius:16px;padding:16px}.card label{display:block;color:var(--muted);font-size:12px;margin-bottom:8px}.card input,.card select,.search{width:100%;background:#0c1728;border:1px solid #30435f;color:var(--text);border-radius:10px;padding:12px;font-size:16px;outline:none}.card input:focus,.card select:focus,.search:focus{border-color:var(--blue)}.hint{font-size:11px;color:#7387a3;margin-top:7px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}.stat{background:#101c2d;border:1px solid var(--line);border-radius:14px;padding:14px}.stat small{color:var(--muted);display:block}.stat strong{font-size:22px;color:var(--green);display:block;margin-top:4px;overflow-wrap:anywhere}
+.toolbar{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:22px 0 12px}.toolbar h2{font-size:18px;margin:0}.tools{display:flex;gap:8px;flex-wrap:wrap}.btn{border:1px solid #355174;background:#172a44;color:#dceaff;border-radius:10px;padding:10px 13px;font-weight:650;cursor:pointer}.btn.primary{background:#2762a6;border-color:#3478c6;color:white}.btn:hover{filter:brightness(1.15)}.search{max-width:280px;font-size:14px;padding:10px 12px}
+.tablebox{border:1px solid var(--line);border-radius:15px;overflow:hidden;background:#101a2a}table{border-collapse:collapse;width:100%;min-width:760px}th,td{padding:12px 13px;text-align:right;border-bottom:1px solid #24344b;font-variant-numeric:tabular-nums}th{background:#18263b;color:#9eb3ce;font-size:11px;letter-spacing:.5px;position:sticky;top:0}td:first-child,th:first-child{text-align:left}td:nth-child(2),th:nth-child(2){text-align:left}.plan{font-weight:750;color:#eaf2ff}.tag{font-size:10px;color:#9fc7ff;background:#1b3553;padding:3px 6px;border-radius:6px;margin-left:6px}.profit{color:var(--green)}.sell{color:var(--gold);font-weight:800}.empty{padding:30px;text-align:center;color:var(--muted)}
+.note{color:var(--muted);font-size:12px;margin-top:12px}.foot{margin-top:26px;color:#6f829d;font-size:11px;text-align:center}.hide{display:none}
+@media(max-width:760px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.stats{grid-template-columns:1fr 1fr}.head{align-items:flex-start}.pill{display:none}.wrap{padding:18px 12px 40px}.card{padding:13px}.toolbar{align-items:flex-start}.search{max-width:none;flex:1;min-width:100%}}
+@media(max-width:390px){.grid{grid-template-columns:1fr 1fr}.card input,.card select{font-size:14px;padding:10px}}
+</style>
+</head>
+<body><main class="wrap">
+<header class="head"><div class="brand"><div class="logo">💎</div><div><div class="eyebrow">MLBB • MYANMAR SERVER</div><h1>SmileOne Calculator</h1><div class="sub">Coin cost · Diamond packages · Profit</div></div></div><div class="pill">LOCAL CALCULATOR · v1.0</div></header>
+<section class="grid">
+<div class="card"><label>SmileOne ဝယ်ယူသော Coin</label><input id="coinQty" type="number" min="0.0001" step="any" value="1000"><div class="hint">ဥပမာ — 1000 Coin</div></div>
+<div class="card"><label>စုစုပေါင်းဝယ်ရင်းစျေး (Ks)</label><input id="totalCost" type="number" min="0" step="any" value="86430"><div class="hint">ဥပမာ — 86,430 Ks</div></div>
+<div class="card"><label>အမြတ်ရာခိုင်နှုန်း (%)</label><input id="profitPct" type="number" min="0" step="any" value="5"><div class="hint">လိုသလို ပြောင်းလဲနိုင်သည်</div></div>
+<div class="card"><label>ရောင်းဈေး အဝိုင်းချစနစ်</label><select id="rounding"><option value="1">1 Ks (မဝိုင်း)</option><option value="10">10 Ks</option><option value="50" selected>50 Ks</option><option value="100">100 Ks</option><option value="500">500 Ks</option><option value="1000">1,000 Ks</option></select><div class="hint">အပေါ်ဘက်သို့ အမြဲဝိုင်းမည်</div></div>
+</section>
+<section class="stats">
+<div class="stat"><small>1 Coin အရင်းစျေး</small><strong id="unitCost">86.43 Ks</strong></div>
+<div class="stat"><small>Package စုစုပေါင်း</small><strong id="packageCount">35 ခု</strong></div>
+<div class="stat"><small>တွက်ချက်မှုအခြေအနေ</small><strong id="status" style="font-size:16px">အသင့်ဖြစ်ပါပြီ</strong></div>
+</section>
+<div class="toolbar"><h2>Package စျေးနှုန်းစာရင်း</h2><input class="search" id="search" placeholder="Dia / WP / VP / TW ရှာရန်…"><div class="tools"><button class="btn" id="copyCost">အရင်း Copy</button><button class="btn" id="copySell">ရောင်းဈေး Copy</button><button class="btn primary" id="copyAll">အားလုံး Copy</button></div></div>
+<div class="tablebox"><table><thead><tr><th>No.</th><th>Dia Plan</th><th>Coin ဖြတ်နှုန်း</th><th>အရင်း (Ks)</th><th>အမြတ် (Ks)</th><th>ရောင်းဈေး (Ks)</th></tr></thead><tbody id="rows"></tbody></table><div id="empty" class="empty hide">ရှာဖွေမှုနှင့် ကိုက်ညီသော Package မရှိပါ။</div></div>
+<p class="note">မှတ်ချက် — အရင်း = 1 Coin အရင်း × Coin ဖြတ်နှုန်း။ အမြတ် = အရင်း × သတ်မှတ်ရာခိုင်နှုန်း။ ရောင်းဈေးကို ရွေးထားသော အဝိုင်းချစနစ်အတိုင်း အပေါ်ဘက်သို့ ဝိုင်းထားသည်။</p>
+<div class="foot">SmileOne Diamond Calculator · သင့်စက်ထဲတွင်သာ အချက်အလက်များ သိမ်းဆည်းသည်</div>
+</main>
+<script>
+const defaults = [
+["86",71.3],["172",141.5],["257",206.8],["343",278.1],["429",348.3],["514",413.6],["600",484.9],["706",558],["792",629.3],["878",699.5],["963",764.8],["1049",836.1],["1135",906.3],["1220",971.6],["1412",1116],["1584",1257.5],["1841",1464.3],["2195",1687.1],["2901",2245.1],["3073",2386.6],["3688",2814.2],["5100",3930.2],["5532",4245.3],["7376",5628.4],["9288",7054.4],["55 (50 2x)",45.2],["165 (150 2x)",135.6],["275 (250 2x)",218.3],["565 (500 2x)",448.2],["WP",88.5],["VP",13.9],["DP",45.2],["WEB",45.2],["MEB",227.3],["TW",466.9]
+];
+const $=id=>document.getElementById(id);
+const fmt=n=>Number.isFinite(n)?new Intl.NumberFormat("en-US",{maximumFractionDigits:2}).format(n):"—";
+let packages=defaults.map(x=>({plan:x[0],coins:x[1]}));
+function calc(p){const qty=+$("coinQty").value,total=+$("totalCost").value,profit=+$("profitPct").value,step=+$("rounding").value;if(!(qty>0)||!(total>=0)||!(profit>=0))return null;const unit=total/qty,cost=unit*p.coins,earn=cost*profit/100,raw=cost+earn,sell=step===1?raw:Math.ceil((raw-1e-9)/step)*step;return{unit,cost,earn,sell};}
+function render(){const qty=+$("coinQty").value,total=+$("totalCost").value;if(!(qty>0)||!(total>=0)){ $("status").textContent="Input စစ်ဆေးပါ";$("unitCost").textContent="—";$("rows").innerHTML="";return;}
+const unit=total/qty;$("unitCost").textContent=fmt(unit)+" Ks";$("packageCount").textContent=packages.length+" ခု";$("status").textContent="အသင့်ဖြစ်ပါပြီ";
+const q=$("search").value.trim().toLowerCase();const matches=packages.filter(p=>(p.plan+" "+p.coins).toLowerCase().includes(q));$("empty").classList.toggle("hide",matches.length>0);$("rows").innerHTML=matches.map((p,i)=>{const c=calc(p);return `<tr><td>${packages.indexOf(p)+1}</td><td class="plan">${p.plan}${/[a-z]/i.test(p.plan)?'<span class="tag">SPECIAL</span>':''}</td><td>${fmt(p.coins)}</td><td>${fmt(c.cost)}</td><td class="profit">${fmt(c.earn)}</td><td class="sell">${fmt(c.sell)}</td></tr>`}).join("");}
+function lines(mode){return packages.map(p=>{const c=calc(p);if(!c)return"";if(mode==="cost")return `${p.plan} - ${fmt(c.cost)} Ks`;if(mode==="sell")return `${p.plan} - ${fmt(c.sell)} Ks`;return `${p.plan} | Coin ${fmt(p.coins)} | အရင်း ${fmt(c.cost)} Ks | အမြတ် ${fmt(c.earn)} Ks | ရောင်း ${fmt(c.sell)} Ks`;}).join("\n");}
+async function copy(mode){try{await navigator.clipboard.writeText(lines(mode));const b=$(mode==="cost"?"copyCost":mode==="sell"?"copySell":"copyAll");const old=b.textContent;b.textContent="Copied ✓";setTimeout(()=>b.textContent=old,1400);}catch(e){alert("Copy မရပါက စာမျက်နှာကို HTTPS ဖြင့်ဖွင့်ပြီး ထပ်ကြိုးစားပါ။");}}
+["coinQty","totalCost","profitPct","rounding","search"].forEach(id=>$(id).addEventListener("input",render));["copyCost","copySell","copyAll"].forEach(id=>$(id).addEventListener("click",()=>copy(id==="copyCost"?"cost":id==="copySell"?"sell":"all")));
+render();
+</script></body></html>
